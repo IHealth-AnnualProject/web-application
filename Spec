@@ -1,0 +1,15 @@
+Site Internet :
+- Pouvoir visualiser grâce à des graphes/tableau ( au travers d’un dashboard) le suivi de patients ayant donné des informations à l’application de Olivier Mirat
+    - Ajuster la visualisation sur les graphes en termes de zoom, période d’analyse (entre deux instants T)
+    - Pouvoir changer de visualisation entre tableau/graphes
+    - Pouvoir exporter les graphes au format CSV/XLS
+    - Afficher sur des graphes spécialisés les prédictions sur le temps, donc deux affichages, un sur l’actuel et l’autre sur les predictions
+    - Afficher la marge d’amélioration de la santé du patient
+- Recevoir des recommandations/predictions en fonction des données analysées (autant sur l’application que en tant que push notification) cette fonctionnalité devrait être implémentée mais ne sera activée que lorsque l’on sera sûre des recommandations
+- Pouvoir rechercher d’autres utilisateurs ou des coach de la santé sur l’application
+    - Pouvoir afficher un descriptif de la personne avec dans le cadre d’un coach de santé la possibilité d’avoir une carte pour visualiser son emplacement
+    - Pouvoir chatter avec un coach de la santé
+- Avoir un back office permettant de gérer la visualisation des données en termes de graphes
+- Une fonctionnalité ludique pour maintenir la motivation de l'utilisateur à garder un style de vie sain qui en fonction des facteurs connus pour aider à traiter la maladie
+
+- toute la visualisation suppose qu'on aie accès aux données venant de Google Fit et de Fitbit. Une partie significative du travail va donc être d'appeler l'API de Fitbit et de Google Fit (disons toutes les 24 heures par exemple, ou à chaque fois que l'utilisateur se log) et de stocker les données venant de Fitbit et/ou de Google Fit dans la base de données (il faudra donc à priori créer une ou plusieurs nouvelles tables mysql)
