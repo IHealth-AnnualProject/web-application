@@ -16,6 +16,9 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4"
+    "sirv-cli": "^0.4.4",
+    "svelte-preprocess": "^3.9.8",
+    "svelte-routing": "^1.4.2",
+    "typescript": "^3.9.5"
   }
 }
