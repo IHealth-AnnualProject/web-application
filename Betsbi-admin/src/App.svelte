@@ -7,11 +7,15 @@
 	import Home from './routes/Home.svelte'
 	import Footer from './Footer.svelte'
 	import { FetchUtils }from './utils/fetch_utils.js'
-	var FU = new FetchUtils("E","");
+	var FU = new FetchUtils(process.env.API_URL,"");
 </script>
 <NavBar></NavBar>
-<Connection FU={FU}></Connection>
+<Router>
+    <Route path="/"> <Connection FU={FU}></Connection></Route>
+    <Route path="/Home" component ={Home} />
+</Router>
+
 <Footer></Footer>
 <style>
-
+    @font-face { font-family: Betsbi-font; src: url('/resources/PoetsenOne-Regular.ttf'); }
 </style>

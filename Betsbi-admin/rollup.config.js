@@ -4,6 +4,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess'
+import {config} from 'dotenv';
+import replace from '@rollup/plugin-replace';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -24,6 +26,14 @@ export default {
 				css.write('public/build/bundle.css');
 			},
 			preprocess:autoPreprocess()
+		}),
+		replace({
+            process: JSON.stringify({
+                env: {
+                    isProd: production,
+                    ...config().parsed // attached the .env config
+                }
+            }),
 		}),
 
 		// If you have external dependencies installed from

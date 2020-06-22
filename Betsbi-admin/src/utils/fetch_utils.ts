@@ -1,6 +1,6 @@
 export class FetchUtils{
 
-    constructor(private readonly API_URL: string,private token:string) {}
+    constructor(private readonly API_URL: string,private token:string,user) {}
 
     async get(route:string){
         let myHeaders = new Headers();
@@ -15,10 +15,19 @@ export class FetchUtils{
     }
 
     async post(route:string,data:string){
-        let request = this.API_URL+route;
-        fetch(request, {
+        let request = 'http://'+this.API_URL+route;
+        console.log(request);
+        return fetch(request, {
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             method: "POST",
-            body: data
+            body: JSON.stringify(data),
+            mode:'cors'
+        }).then(function(response) {
+            console.log("blabla")
+            return response;
         })
     }
 

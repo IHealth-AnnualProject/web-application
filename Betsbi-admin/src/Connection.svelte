@@ -1,17 +1,34 @@
 
 <script>
+    import { navigate } from "svelte-routing";
+    import Home from "./routes/Home.svelte";
     let login;
     let password;
     let error;
     let errordisplay = false;
     export let FU;
-	function Login() {
+	async function Login() {
 	        if(!login || !password){
 	            error="Le nom d'utilisateur ou le mot de passe est manquant";
                 errordisplay = true;
                 return;
 	        }
-            FU.get();
+            let res = await FU.post('/auth/login',{username:login,password:password});
+	        console.log(res);
+	        if(!res.ok){
+	            errordisplay = true;
+	            if(res.status===400)error = "Nom de compte ou mot de passe erroné";
+                else if(res.status===404)error = "Connexion impossible avec le serveur";
+                return;
+	        }else{
+	            console.log("success");
+	           res.json().then(function(json) {
+	                                        FU.token = json.token.access_token;
+	                                        FU.user = json.user;
+                                            console.log(json);
+                                            navigate("/home", { replace: true });
+                                          });
+	        }
             errordisplay = false;
 	}
 </script>
@@ -30,10 +47,8 @@
                        <input bind:value={password} type="password" class="form-control" placeholder="Password">
                     </div>
                     <button  type="button" class="btn btn-black" on:click="{Login}" >Login</button>
-                    <button type="submit" class="btn btn-secondary">Register</button>
                     {#if errordisplay}
                       <div class ="error">{error}</div>
-
                     {/if}
                  </form>
               </div>
@@ -72,13 +87,15 @@ body {
 }
 
 .btn-black{
-    background-color: rgb(116, 113, 1) !important;
+    background-color: rgb(255, 195, 1) !important;
     color: #fff;
 }
 
 .login-form{
     padding-top:10%;
-    width:40%
+    width:40%;
+    max-width:500px;
+
 }
 .error{
     color: #721c24;

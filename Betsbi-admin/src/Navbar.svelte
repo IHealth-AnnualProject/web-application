@@ -5,7 +5,7 @@
 
 <style>
 	.bg-primary {
-        background:rgb(116, 113, 1);
+        background:rgb(0, 116, 113);
         text-align:left;
 	}
 
@@ -17,5 +17,6 @@
     .betsbi-nav{
        padding-right: 355px;
        font-size: 80px;
+       font-family:Betsbi-font;
     }
 </style>
