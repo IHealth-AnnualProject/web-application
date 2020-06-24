@@ -37,10 +37,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FetchUtils = void 0;
+var svelte_persistent_store_1 = require("svelte-persistent-store");
+var writable = svelte_persistent_store_1.local.writable, readable = svelte_persistent_store_1.local.readable, derived = svelte_persistent_store_1.local.derived;
 var FetchUtils = /** @class */ (function () {
-    function FetchUtils(API_URL, token, user) {
+    function FetchUtils(API_URL, token, user, store, tokenstore) {
         this.API_URL = API_URL;
         this.token = token;
+        this.store = store;
+        this.tokenstore = tokenstore;
+        this.token = localStorage.getItem("token") || "";
+        this.store = localStorage.getItem("token");
     }
     FetchUtils.prototype.get = function (route) {
         return __awaiter(this, void 0, void 0, function () {
@@ -55,6 +61,18 @@ var FetchUtils = /** @class */ (function () {
                     return response.blob();
                 });
                 return [2 /*return*/];
+            });
+        });
+    };
+    FetchUtils.prototype.is_token_valid = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var request;
+            return __generator(this, function (_a) {
+                request = 'http://' + this.API_URL + '/auth/is-token-valid';
+                console.log(this.token);
+                return [2 /*return*/, fetch(request).then(function (response) {
+                        return response.ok;
+                    })];
             });
         });
     };
@@ -78,6 +96,12 @@ var FetchUtils = /** @class */ (function () {
                     })];
             });
         });
+    };
+    FetchUtils.prototype.setToken = function (token) {
+        console.log("setToken");
+        console.log(token);
+        localStorage.setItem("token", token);
+        this.token = token;
     };
     return FetchUtils;
 }());

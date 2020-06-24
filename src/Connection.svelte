@@ -1,5 +1,6 @@
 
 <script>
+    import { writable, readable, derived } from 'svelte-persistent-store/dist/session';
     import { navigate } from "svelte-routing";
     import Home from "./routes/Home.svelte";
     let login;
@@ -23,7 +24,8 @@
 	        }else{
 	            console.log("success");
 	           res.json().then(function(json) {
-	                                        FU.token = json.token.access_token;
+	                                        FU.setToken(json.token.access_token);
+	                                        //token = json.token.access_token;
 	                                        FU.user = json.user;
                                             console.log(json);
                                             navigate("/home", { replace: true });
