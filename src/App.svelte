@@ -1,12 +1,11 @@
-<script async>
+<script>
 	import { onMount } from 'svelte';
-	export var token;
     import { navigate } from "svelte-routing";
 	import {Router,Link,Route} from "svelte-routing";
-	import NavBar from './Navbar.svelte'
-	import Connection from './Connection.svelte'
+	import Header from './component/Header.svelte'
+	import Connection from './component/Connection.svelte'
 	import Home from './routes/Home.svelte'
-	import Footer from './Footer.svelte'
+	import Footer from './component/Footer.svelte'
 	import { FetchUtils }from './utils/fetch_utils.js'
 	let FU = new FetchUtils(process.env.API_URL,"");
 
@@ -20,10 +19,10 @@
                         	}
     	});
 </script>
-<NavBar></NavBar>
+<Header></Header>
 <Router>
     <Route path="/"> <Connection FU={FU}></Connection></Route>
-    <Route path="/home" component ={Home} />
+    <Route path="/home"><Home FU={FU}></Home></Route>
 </Router>
 
 <Footer></Footer>

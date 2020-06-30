@@ -23,7 +23,15 @@ export class FetchUtils{
     async is_token_valid(){
         let request = 'http://'+this.API_URL+'/auth/is-token-valid';
         console.log(this.token);
-        return fetch(request).then(function(response) {
+        return fetch(request,{
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+this.token
+            },
+            method: "GET",
+            mode:'cors'
+        }).then(function(response) {
             return response.ok;
         })
     }
@@ -40,7 +48,7 @@ export class FetchUtils{
             body: JSON.stringify(data),
             mode:'cors'
         }).then(function(response) {
-            console.log("blabla")
+            console.log("blabla");
             return response;
         })
     }
@@ -50,6 +58,10 @@ export class FetchUtils{
         console.log(token);
         localStorage.setItem("token", token);
         this.token=token;
+    }
+
+    disconnect(){
+        this.setToken("");
     }
 
 

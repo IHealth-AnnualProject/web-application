@@ -2,7 +2,7 @@
 <script>
     import { writable, readable, derived } from 'svelte-persistent-store/dist/session';
     import { navigate } from "svelte-routing";
-    import Home from "./routes/Home.svelte";
+    //import Home from "../routes/Home.svelte";
     let login;
     let password;
     let error;
