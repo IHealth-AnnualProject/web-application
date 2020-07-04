@@ -50,17 +50,23 @@ var FetchUtils = /** @class */ (function () {
     }
     FetchUtils.prototype.get = function (route) {
         return __awaiter(this, void 0, void 0, function () {
-            var myHeaders, myInit;
+            var request, myInit;
             return __generator(this, function (_a) {
-                myHeaders = new Headers();
-                myInit = { method: 'GET',
-                    headers: myHeaders,
+                request = 'http://' + this.API_URL + route;
+                myInit = {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + this.token
+                    },
+                    method: 'GET',
                     mode: 'cors',
                 };
-                fetch(route).then(function (response) {
-                    return response.blob();
-                });
-                return [2 /*return*/];
+                return [2 /*return*/, fetch(request, myInit).then(function (response) {
+                        return response.json().then(function (data) {
+                            return data;
+                        });
+                    })];
             });
         });
     };

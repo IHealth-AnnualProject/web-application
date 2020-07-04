@@ -5,6 +5,7 @@
 	import Header from './component/Header.svelte'
 	import Connection from './component/Connection.svelte'
 	import Home from './routes/Home.svelte'
+    import Erreurs from './routes/Erreurs.svelte'
 	import Footer from './component/Footer.svelte'
 	import { FetchUtils }from './utils/fetch_utils.js'
 	let FU = new FetchUtils(process.env.API_URL,"");
@@ -23,6 +24,7 @@
 <Router>
     <Route path="/"> <Connection FU={FU}></Connection></Route>
     <Route path="/home"><Home FU={FU}></Home></Route>
+    <Route path="/errors"><Erreurs FU={FU}></Erreurs></Route>
 </Router>
 
 <Footer></Footer>

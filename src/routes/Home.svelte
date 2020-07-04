@@ -1,30 +1,32 @@
 <script>
     import NavBar from '../component/NavBar.svelte'
+    import LastComponent from '../component/LastComponent.svelte'
+    import { onMount } from 'svelte';
+
     export let FU;
-    export let coucou = "coucou"
+
+    export let coucou = "coucou";
+    import {Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+
 </script>
-
 <NavBar FU={FU}></NavBar>
-
-
-    <div class="last-error">
-            <div class="title-error"><label class = "label-titre">Titre :</label><label class="title-value">value</label></div>
-            <div class="users"><label class = "label-value">Auteur :</label><label class="title-value">Report:</label></div>
-    </div>
+<div>
+<h1>Dernière news </h1>
+</div>
+<div class="valid">
+<LastComponent FU={FU} type="VALID"></LastComponent>
+</div>
+<div class="valid">
+<LastComponent FU={FU} type="ERROR"></LastComponent>
+</div>
+<div class="valid">
+<LastComponent FU={FU} type="REPORT"></LastComponent>
+</div>
 
 <style>
-   .last-error{
-       width: 50%;
-       margin-left: 30%;
-       margin-top: 9%;
-   }
-    .title-value{
-     display: inline;
-    }
-    .label-titre{
-           display: inline;
-    }
-    .last-error{
-        background: #f5f5f5;
+    .valid{
+        width:33%;
+        display: inline-block;
+        padding:2%
     }
 </style>

@@ -9,14 +9,20 @@ export class FetchUtils{
     }
 
     async get(route:string){
-        let myHeaders = new Headers();
-
-        let myInit = { method: 'GET',
-            headers: myHeaders,
+        let request = 'http://'+this.API_URL+route;
+        let myInit:any = {
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+this.token
+            },
+            method: 'GET',
             mode: 'cors',
             };
-        fetch(route).then(function(response) {
-            return response.blob();
+        return fetch(request,myInit).then(function(response) {
+           return  response.json().then(function(data) {
+                return data;
+            });
         })
     }
 
