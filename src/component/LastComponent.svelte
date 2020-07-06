@@ -38,7 +38,7 @@
      </CardText>
      <Button>Voir plus</Button>
    </CardBody>
-   <CardFooter>Date</CardFooter>
+   <CardFooter>{data.created}</CardFooter>
  </Card>
 {:else if type === "ERROR"}
  <Card class="mb-3">

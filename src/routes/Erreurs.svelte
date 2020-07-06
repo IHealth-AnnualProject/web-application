@@ -13,9 +13,8 @@
          };
 
        function navigate_one_errors(value){
-                console.log("cc");
                 console.log(value);
-                navigate('/error/?token=value')
+                navigate('/error/?token='+JSON.stringify(value))
             }
 
     onMount(async () => {
@@ -40,9 +39,9 @@
                  <td>{errors[i].name}</td>
                  <td>{formatDateWithHour(new Date(errors[i].created))}</td>
                  {#if errors[i].state === "PENDING"}
-                 <td class="redrr">{errors[i].state}</td>
+                 <td class="redrr">NON RESOLU</td>
                  {:else}
-                 <td class="bluerr">{errors[i].state}</td>
+                 <td class="bluerr">RESOLU</td>
                  {/if}
                </tr>
        	{/each}

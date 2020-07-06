@@ -46,7 +46,8 @@ export class FetchUtils{
         return fetch(request, {
             headers:{
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+this.token
             },
             method: "POST",
             body: JSON.stringify(data),

@@ -97,7 +97,8 @@ var FetchUtils = /** @class */ (function () {
                 return [2 /*return*/, fetch(request, {
                         headers: {
                             'Accept': 'application/json',
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + this.token
                         },
                         method: "POST",
                         body: JSON.stringify(data),
