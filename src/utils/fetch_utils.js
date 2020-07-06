@@ -75,7 +75,6 @@ var FetchUtils = /** @class */ (function () {
             var request;
             return __generator(this, function (_a) {
                 request = 'http://' + this.API_URL + '/auth/is-token-valid';
-                console.log(this.token);
                 return [2 /*return*/, fetch(request, {
                         headers: {
                             'Accept': 'application/json',
@@ -95,7 +94,6 @@ var FetchUtils = /** @class */ (function () {
             var request;
             return __generator(this, function (_a) {
                 request = 'http://' + this.API_URL + route;
-                console.log(request);
                 return [2 /*return*/, fetch(request, {
                         headers: {
                             'Accept': 'application/json',
@@ -105,15 +103,12 @@ var FetchUtils = /** @class */ (function () {
                         body: JSON.stringify(data),
                         mode: 'cors'
                     }).then(function (response) {
-                        console.log("blabla");
                         return response;
                     })];
             });
         });
     };
     FetchUtils.prototype.setToken = function (token) {
-        console.log("setToken");
-        console.log(token);
         localStorage.setItem("token", token);
         this.token = token;
     };

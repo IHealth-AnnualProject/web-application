@@ -33,7 +33,11 @@
                  <th scope="row">1</th>
                  <td>{errors[i].name}</td>
                  <td>{formatDateWithHour(new Date(errors[i].created))}</td>
-                 <td>{errors[i].state}</td>
+                 {#if errors[i].state === "PENDING"}
+                 <td class="redrr">{errors[i].state}</td>
+                 {:else}
+                 <td class="bluerr">{errors[i].state}</td>
+                 {/if}
                </tr>
        	{/each}
 
@@ -47,4 +51,13 @@
         padding-left: 25%;
         padding-top: 2%;
     }
+    .bluerr{
+    color:green;
+    }
+
+    .redrr{
+        color:red;
+        }
+
+
 </style>

@@ -14,15 +14,12 @@
                     if(type==="ERROR"){
                         data = await FU.get('/error/getLast');
                         data.created = formatDateWithHour(new Date(data.created));
-                        console.log(data)
                     }else if(type==="VALID"){
                         data = await FU.get('/auth/getLast');
                         data.created = formatDateWithHour(new Date(data.created));
-                        console.log(data)
                     }else if(type==="REPORT"){
                         data = await FU.get('/report/getLast');
                         data.created = formatDateWithHour(new Date(data.created));
-                        console.log(data)
                     }
 
              });

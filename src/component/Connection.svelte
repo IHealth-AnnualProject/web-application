@@ -15,19 +15,16 @@
                 return;
 	        }
             let res = await FU.post('/auth/login',{username:login,password:password});
-	        console.log(res);
 	        if(!res.ok){
 	            errordisplay = true;
 	            if(res.status===400)error = "Nom de compte ou mot de passe erroné";
                 else if(res.status===404)error = "Connexion impossible avec le serveur";
                 return;
 	        }else{
-	            console.log("success");
 	           res.json().then(function(json) {
 	                                        FU.setToken(json.token.access_token);
 	                                        //token = json.token.access_token;
 	                                        FU.user = json.user;
-                                            console.log(json);
                                             navigate("/home", { replace: true });
                                           });
 	        }
@@ -79,7 +76,7 @@ body {
 
 @media screen and (min-width: 768px){
     .main{
-        margin-left: 35%;
+        margin-left: 45%;
     }
 }
 

@@ -7,12 +7,14 @@
 	import Home from './routes/Home.svelte'
     import Erreurs from './routes/Erreurs.svelte'
 	import Footer from './component/Footer.svelte'
+	import Validation from './routes/Validation.svelte'
+	import Report from './routes/Report.svelte'
+
 	import { FetchUtils }from './utils/fetch_utils.js'
 	let FU = new FetchUtils(process.env.API_URL,"");
 
 	onMount(async () => {
     			let isTokenValid = await FU.is_token_valid();
-    			 console.log(isTokenValid);
                         	if(!isTokenValid){
                                 navigate("/", { replace: true });
                         	}else{
@@ -25,6 +27,8 @@
     <Route path="/"> <Connection FU={FU}></Connection></Route>
     <Route path="/home"><Home FU={FU}></Home></Route>
     <Route path="/errors"><Erreurs FU={FU}></Erreurs></Route>
+    <Route path="/reports"><Report FU={FU}></Report></Route>
+    <Route path="/validations"><Validation FU={FU}></Validation></Route>
 </Router>
 
 <Footer></Footer>

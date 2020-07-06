@@ -19,11 +19,19 @@
     function navigate_errors(){
             navigate('/errors')
         }
+    function navigate_valid(){
+                    navigate('/validations')
+                }
+    function navigate_report(){
+            navigate('/reports')
+          }
 </script>
    <div class="nave">
       <ul>
         <li class="Accueil" ><a on:click="{navigate_home}">Home</a></li>
         <li class="Erreur" ><a on:click="{navigate_errors}">Erreurs</a></li>
+        <li class="Erreur" ><a on:click="{navigate_valid}">Valid</a></li>
+        <li class="Erreur" ><a on:click="{navigate_report}">Report</a></li>
         <li class="Disconnect" on:click="{Disconnect}"><a>Disconnect</a></li>
       </ul>
     </div>
