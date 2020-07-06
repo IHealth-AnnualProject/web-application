@@ -22,18 +22,17 @@
 <div class="table-error"><Table>
        <thead>
        <tr>
-         <th>#</th>
-         <th>Titre de l'érreur</th>
+         <th>Titre du rapport</th>
          <th>Date</th>
-         <th>Etats</th>
+         <th>Utilisateur signalé</th>
        </tr>
        </thead>
-       <tbody>
+       <tbody class="tableau-hover">
        {#each reports as {name,created,state }, i}
-       		  <tr>
-                 <th scope="row">1</th>
+       		  <tr >
                  <td>{reports[i].name}</td>
                  <td>{formatDateWithHour(new Date(reports[i].created))}</td>
+                 <td>{reports[i].to.username}</td>
                </tr>
        	{/each}
 
@@ -55,5 +54,8 @@
         color:red;
         }
 
+    .tableau-hover tr:hover {
+      background-color: #f5f5f5;
+    }
 
 </style>

@@ -21,16 +21,14 @@
 <div class="table-error"><Table>
        <thead>
        <tr>
-         <th>#</th>
          <th>Titre de l'érreur</th>
          <th>Date</th>
          <th>Etats</th>
        </tr>
        </thead>
-       <tbody>
+       <tbody class="tableau-hover">
        {#each errors as {name,created,state }, i}
        		  <tr>
-                 <th scope="row">1</th>
                  <td>{errors[i].name}</td>
                  <td>{formatDateWithHour(new Date(errors[i].created))}</td>
                  {#if errors[i].state === "PENDING"}
@@ -58,6 +56,10 @@
     .redrr{
         color:red;
         }
+
+        .tableau-hover tr:hover {
+              background-color: #f5f5f5;
+            }
 
 
 </style>
