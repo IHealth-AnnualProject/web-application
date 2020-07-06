@@ -11,6 +11,8 @@
            return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
          };
 
+
+
     onMount(async () => {
         		reports = await FU.get('/report');
         		console.log(reports);

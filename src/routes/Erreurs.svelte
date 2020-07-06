@@ -2,6 +2,7 @@
     import NavBar from '../component/NavBar.svelte'
     import {Table} from 'sveltestrap';
     import { onMount } from 'svelte';
+    import { navigate } from "svelte-routing";
 
     export let FU;
     export let coucou = "coucou";
@@ -10,6 +11,12 @@
     export const formatDateWithHour = (date) => {
            return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
          };
+
+       function navigate_one_errors(value){
+                console.log("cc");
+                console.log(value);
+                navigate('/error/?token=value')
+            }
 
     onMount(async () => {
         		errors = await FU.get('/error');
@@ -28,7 +35,8 @@
        </thead>
        <tbody class="tableau-hover">
        {#each errors as {name,created,state }, i}
-       		  <tr>
+
+       		  <tr on:click={ () => navigate_one_errors(errors[i])} >
                  <td>{errors[i].name}</td>
                  <td>{formatDateWithHour(new Date(errors[i].created))}</td>
                  {#if errors[i].state === "PENDING"}
@@ -57,9 +65,9 @@
         color:red;
         }
 
-        .tableau-hover tr:hover {
+   .tableau-hover tr:hover {
               background-color: #f5f5f5;
-            }
+       }
 
 
 </style>
