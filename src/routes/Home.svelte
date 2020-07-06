@@ -25,7 +25,7 @@
 
 <style>
     .valid{
-        width:33%;
+        width:32%;
         display: inline-block;
         padding:2%
     }
