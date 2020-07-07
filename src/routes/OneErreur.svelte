@@ -1,13 +1,23 @@
 <script>
     import NavBar from '../component/NavBar.svelte'
-    import {Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+    import {Modal,ModalBody,ModalFooter,ModalHeader,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
 
     export let FU;
-    export let location;
     import queryString from "query-string";
     let data = {created:"",username:"",name:"",description:"",email:""};
     let queryParams = queryString.parse(window.location.search);
+    let open = false;
+    const toggle = () => (open = !open);
     data = JSON.parse(queryParams.token);
+
+    async function resolve_or_reopen(){
+            toggle();
+            if(data.state==="PENDING"){
+                await resolve_error();
+            }else{
+                await reopen_error();
+            }
+        }
 
     async function resolve_error(){
        await FU.post('/error/'+data.id+"/validate");
@@ -26,9 +36,9 @@
    <CardHeader>
       <CardSubtitle style = "font-size: 40px;">{data.name}</CardSubtitle>
                  {#if data.state === "PENDING"}
-                 <CardSubtitle style="color :red">{data.state}</CardSubtitle>
+                 <CardSubtitle style="color :red" >En attente</CardSubtitle>
                  {:else}
-                  <CardSubtitle style="color :green">{data.state}</CardSubtitle>
+                  <CardSubtitle style="color :green">Resolu</CardSubtitle>
                  {/if}
    </CardHeader>
    <CardBody>
@@ -36,13 +46,32 @@
       {data.description}
      </CardText>
      {#if data.state === "PENDING"}
-     <Button on:click="{resolve_error}">Resoudre</Button>
+     <Button on:click="{toggle}" color = "success">Resoudre</Button>
      {:else}
-     <Button on:click="{reopen_error}" color ="danger">Reopen</Button>
+     <Button  on:click="{toggle}" color ="danger" >Reopen</Button>
       {/if}
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>
+
+<Modal isOpen={open} {toggle}>
+    <ModalHeader {toggle}>Modal title</ModalHeader>
+    <ModalBody>
+     Etes-vous sûr de vouloir {#if data.state === "PENDING"}valider
+                                               {:else}
+                                                reouvrir
+                                               {/if}
+      cette erreur ?
+    </ModalBody>
+    <ModalFooter>
+          <Button color="primary" on:click={resolve_or_reopen}>
+            Oui
+          </Button>
+          <Button color="secondary" on:click={toggle}>
+            Retour
+          </Button>
+    </ModalFooter>
+  </Modal>
 
 <style>
 

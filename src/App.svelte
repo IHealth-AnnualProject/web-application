@@ -26,6 +26,7 @@
     	});
 </script>
 <Header></Header>
+<div style="height:70%;">
 <Router>
     <Route path="/"> <Connection FU={FU}></Connection></Route>
     <Route path="/home"><Home FU={FU}></Home></Route>
@@ -34,6 +35,7 @@
     <Route path="/reports"><Report FU={FU}></Report></Route>
     <Route path="/validations"><Validation FU={FU}></Validation></Route>
 </Router>
+</div>
 
 <Footer></Footer>
 <style>
