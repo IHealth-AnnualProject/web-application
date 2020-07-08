@@ -5,7 +5,6 @@
 
     export let FU;
 
-    export let coucou = "coucou";
     import {Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
 
 </script>

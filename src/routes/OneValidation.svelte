@@ -1,15 +1,21 @@
 <script>
     import NavBar from '../component/NavBar.svelte'
-    import {Modal,ModalBody,ModalFooter,ModalHeader,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+    import {Toast,ToastHeader,ToastBody,Modal,ModalBody,ModalFooter,ModalHeader,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+     import { onMount } from 'svelte';
 
     export let FU;
     import queryString from "query-string";
-    let data = {created:"",username:"",name:"",description:"",email:""};
+    let data = {created:"",username:"",name:"",description:"",email:"",to:"",from:""};
     let queryParams = queryString.parse(window.location.search);
     let open = false;
     const toggle = () => (open = !open);
-    data = JSON.parse(queryParams.token);
+    let id = queryParams.id;
 
+       onMount(async () => {
+            		data = await FU.get('/auth/valid/'+id);
+            		console.log("tkt");
+            		console.log(data);
+            	});
 
     async function resolve_or_reopen(){
             toggle();
@@ -35,24 +41,17 @@
 
  <Card class="mb-3" style="width: 60%;margin-left: 20%;">
    <CardHeader>
-      <CardSubtitle style = "font-size: 40px;">{data.name}</CardSubtitle>
-                 {#if data.state === "PENDING"}
-                 <CardSubtitle style="color :red" >En attente</CardSubtitle>
-                 {:else}
-                  <CardSubtitle style="color :green">Resolu</CardSubtitle>
-                 {/if}
+      <CardSubtitle style = "font-size: 40px;">Validation d'un nouveau PSY</CardSubtitle>
+
    </CardHeader>
    <CardBody>
-     <CardText>
-      {data.description}
-     </CardText>
-     {#if data.state === "PENDING"}
-     <Button on:click="{toggle}" color = "success">Resoudre</Button>
-     {:else}
-     <Button  on:click="{toggle}" color ="danger" >Reopen</Button>
-      {/if}
-   </CardBody>
-   <CardFooter>{data.created}</CardFooter>
+          <CardSubtitle>{data.username}</CardSubtitle>
+          <CardText>
+            Vous pouvez rentrer en contact avec l'utilisateur via cet email : {data.email}
+          </CardText>
+          <Button>Voir plus</Button>
+        </CardBody>
+        <CardFooter>{data.created}</CardFooter>
  </Card>
 
 <Modal isOpen={open} {toggle}>

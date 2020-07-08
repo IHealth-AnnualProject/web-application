@@ -7,6 +7,7 @@
 	import Home from './routes/Home.svelte'
     import Erreurs from './routes/Erreurs.svelte'
     import OneErreur from './routes/OneErreur.svelte'
+    import OneValidation from './routes/OneValidation.svelte'
 
 	import Footer from './component/Footer.svelte';
 	import Validation from './routes/Validation.svelte';
@@ -32,6 +33,7 @@
     <Route path="/home"><Home FU={FU}></Home></Route>
     <Route path="/errors"><Erreurs FU={FU}></Erreurs></Route>
     <Route path="/error"><OneErreur FU={FU} let:location></OneErreur></Route>
+    <Route path="/validation"><OneValidation FU={FU}></OneValidation></Route>
     <Route path="/reports"><Report FU={FU}></Report></Route>
     <Route path="/validations"><Validation FU={FU}></Validation></Route>
 </Router>

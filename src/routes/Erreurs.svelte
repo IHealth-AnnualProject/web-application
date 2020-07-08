@@ -5,7 +5,6 @@
     import { navigate } from "svelte-routing";
 
     export let FU;
-    export let coucou = "coucou";
     let errors = [];
 
     export const formatDateWithHour = (date) => {

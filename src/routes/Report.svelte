@@ -4,7 +4,6 @@
     import { onMount } from 'svelte';
 
     export let FU;
-    export let coucou = "coucou";
     let reports = [];
 
     export const formatDateWithHour = (date) => {
