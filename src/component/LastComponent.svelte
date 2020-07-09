@@ -34,9 +34,13 @@
    <CardBody>
      <CardSubtitle>{data.username}</CardSubtitle>
      <CardText>
+     {#if data.id === undefined}
+        Aucune nouvelle demande de validation
+     {:else}
        Vous pouvez rentrer en contact avec l'utilisateur via cet email : {data.email}
+     {/if}
      </CardText>
-     <Button>Voir plus</Button>
+     <Button disabled='{data.id === undefined}'>Voir plus</Button>
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>
@@ -50,7 +54,7 @@
      <CardText>
       {data.description}
      </CardText>
-     <Button>Voir plus</Button>
+     <Button disabled='{data.id === undefined}'>Voir plus</Button>
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>
@@ -64,7 +68,7 @@
      <CardText>
         {data.description}
      </CardText>
-     <Button>Voir plus</Button>
+     <Button disabled='{data.id === undefined}'>Voir plus</Button>
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>

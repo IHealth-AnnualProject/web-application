@@ -2,6 +2,7 @@
     import NavBar from '../component/NavBar.svelte'
     import {Table} from 'sveltestrap';
     import { onMount } from 'svelte';
+    import { navigate } from "svelte-routing";
 
     export let FU;
     let reports = [];
@@ -11,7 +12,9 @@
          };
 
 
-
+     function navigate_one_report(id){
+                    navigate('/report/?id='+id)
+                }
     onMount(async () => {
         		reports = await FU.get('/report');
         		console.log(reports);
@@ -30,7 +33,7 @@
        </thead>
        <tbody class="tableau-hover">
        {#each reports as {name,created,state }, i}
-       		  <tr >
+       		   <tr on:click={ () => navigate_one_report(reports[i].id)}>
                  <td>{reports[i].name}</td>
                  <td>{formatDateWithHour(new Date(reports[i].created))}</td>
                  <td>{reports[i].to.username}</td>

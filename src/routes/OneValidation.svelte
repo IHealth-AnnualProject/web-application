@@ -1,7 +1,9 @@
 <script>
     import NavBar from '../component/NavBar.svelte'
     import {Toast,ToastHeader,ToastBody,Modal,ModalBody,ModalFooter,ModalHeader,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
-     import { onMount } from 'svelte';
+    import { onMount } from 'svelte';
+    import { navigate } from "svelte-routing";
+
 
     export let FU;
     import queryString from "query-string";
@@ -17,22 +19,13 @@
             		console.log(data);
             	});
 
-    async function resolve_or_reopen(){
+    async function validate(){
             toggle();
-            if(data.state==="PENDING"){
-                await resolve_error();
-            }else{
-                await reopen_error();
-            }
+            await FU.post('/auth/validatePsy/'+data.id);
+            navigate("/validations");
         }
 
-    async function resolve_error(){
-       await FU.post('/error/'+data.id+"/validate");
-    }
-        async function reopen_error(){
-           await FU.post('/error/'+data.id+"/pending");
-        }
-        export const formatDateWithHour = (date) => {
+    export const formatDateWithHour = (date) => {
                return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
              };
     data.created = formatDateWithHour(new Date(data.created));
@@ -49,7 +42,7 @@
           <CardText>
             Vous pouvez rentrer en contact avec l'utilisateur via cet email : {data.email}
           </CardText>
-          <Button>Voir plus</Button>
+            <Button on:click="{toggle}" color="success">Valider</Button>
         </CardBody>
         <CardFooter>{data.created}</CardFooter>
  </Card>
@@ -57,14 +50,10 @@
 <Modal isOpen={open} {toggle}>
     <ModalHeader {toggle}>Modal title</ModalHeader>
     <ModalBody>
-     Etes-vous sûr de vouloir {#if data.state === "PENDING"}valider
-                                               {:else}
-                                                reouvrir
-                                               {/if}
-      cette erreur ?
+     Etes-vous sûr de vouloir valider ce psycologue ?
     </ModalBody>
     <ModalFooter>
-          <Button color="primary" on:click={resolve_or_reopen}>
+          <Button color="primary" on:click={validate}>
             Oui
           </Button>
           <Button color="secondary" on:click={toggle}>
@@ -72,7 +61,6 @@
           </Button>
     </ModalFooter>
   </Modal>
-
 <style>
 
 
