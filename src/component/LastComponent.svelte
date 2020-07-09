@@ -13,13 +13,19 @@
          onMount(async () => {
                     if(type==="ERROR"){
                         data = await FU.get('/error/getLast');
-                        data.created = formatDateWithHour(new Date(data.created));
+                           if(data.created !==""){
+                                                    data.created = formatDateWithHour(new Date(data.created));
+                                                }
                     }else if(type==="VALID"){
-                        data = await FU.get('/auth/getLast');
-                        data.created = formatDateWithHour(new Date(data.created));
+                          data = await FU.get('/auth/getLast');
+                          if(data.created !==""){
+                                                data.created = formatDateWithHour(new Date(data.created));
+                                                }
                     }else if(type==="REPORT"){
                         data = await FU.get('/report/getLast');
-                        data.created = formatDateWithHour(new Date(data.created));
+                        if(data.created !==""){
+                            data.created = formatDateWithHour(new Date(data.created));
+                        }
                     }
 
              });
