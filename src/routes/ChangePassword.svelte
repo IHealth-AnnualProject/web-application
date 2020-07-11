@@ -11,6 +11,7 @@
     let queryParams = queryString.parse(window.location.search);
     let id = queryParams.id;
     let error =false;
+    let change = false;
     onMount(async () => {
             let response = await FU.post('/auth/checkTokenReset/',{token:id});
             if(!response.ok){
@@ -23,6 +24,7 @@
              let responseChange = await FU.post('/auth/changePassword/',{token:id,newPassword:pass});
              if(responseChange.ok){
                  console.log("blabla");
+                 change = true;
                  message= "Votre mot de passe à été changé";
              }
         }
@@ -30,21 +32,22 @@
 
 </script>
     <div class="form-group">
-                {#if !error}
+                {#if !change}
                        <label>Mot de passe</label>
                        <input bind:value={pass} type="password" class="form-control" placeholder="Mot de passe">
                        <br>
                        <input bind:value={confirmPassword} type="password" class="form-control" placeholder="Mot de passe">
                        <button  type="button" class="btn btn-black" on:click="{changePassword}" >Envoyer</button>
-                       {#if displayMessage}
-                          <Alert {color}>
-                            {message}
-                          </Alert>
-                        {/if}
                 {:else}
-                <Card>
-                  <CardBody>Le lien pour changer de mot de passe a expiré veuillez réitérer votre demande.</CardBody>
-                </Card>
+                    {#if error}
+                    <Card>
+                        <CardBody>Le lien pour changer de mot de passe a expiré veuillez réitérer votre demande.</CardBody>
+                    </Card>
+                    {:else}
+                     <Card>
+                        <CardBody>Votre mot de passe a été changé !</CardBody>
+                     </Card>
+                    {/if}
                 {/if}
     </div>
 <style>
