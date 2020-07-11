@@ -25,8 +25,8 @@
     function navigate_report(){
             navigate('/reports')
           }
-    function navigate_videos(){
-            navigate('/videos')
+    function navigate_musique(){
+            navigate('/musique')
           }
 </script>
    <div class="nave">
@@ -35,7 +35,7 @@
         <li class="Erreur" ><a href="#" on:click="{navigate_errors}">Erreurs</a></li>
         <li class="Erreur" ><a href="#" on:click="{navigate_valid}">Valid</a></li>
         <li class="Erreur" ><a href="#" on:click="{navigate_report}">Report</a></li>
-        <li class="Erreur" ><a href="#" on:click="{navigate_videos}">Vidéos</a></li>
+        <li class="Erreur" ><a href="#" on:click="{navigate_musique}">Musique</a></li>
         <li class="Disconnect" on:click="{Disconnect}"><a href="#">Disconnect</a></li>
       </ul>
     </div>
