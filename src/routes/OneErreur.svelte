@@ -1,6 +1,7 @@
 <script>
     import NavBar from '../component/NavBar.svelte'
     import {Modal,ModalBody,ModalFooter,ModalHeader,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+    import { onMount } from 'svelte';
 
     export let FU;
     import queryString from "query-string";
@@ -8,7 +9,13 @@
     let queryParams = queryString.parse(window.location.search);
     let open = false;
     const toggle = () => (open = !open);
-    data = JSON.parse(queryParams.token);
+    let id = queryParams.id;
+
+        onMount(async () => {
+                		data = await FU.get('/error/'+id);
+                		console.log(data);
+                		data.created = formatDateWithHour(new Date(data.created));
+                	});
 
 
     async function resolve_or_reopen(){
@@ -19,6 +26,8 @@
                 await reopen_error();
             }
         }
+
+
 
     async function resolve_error(){
        await FU.post('/error/'+data.id+"/validate");

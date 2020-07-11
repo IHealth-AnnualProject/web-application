@@ -23,6 +23,13 @@
                 		report.from.created = formatDateWithHour(new Date(report.from.created));
                 	});
 
+
+              async function ban(){
+                      toggle();
+                      //await FU.post('/auth/validatePsy/'+report.id);
+                      navigate("/reports");
+                  }
+
 </script>
 <NavBar FU={FU}></NavBar>
 <div class="main-div">
@@ -84,14 +91,10 @@
 <Modal isOpen={open} {toggle}>
     <ModalHeader {toggle}>Modal title</ModalHeader>
     <ModalBody>
-     Etes-vous sûr de vouloir {#if data.state === "PENDING"}valider
-                                               {:else}
-                                                reouvrir
-                                               {/if}
-      cette erreur ?
+     Etes-vous sûr de vouloir ban {report.to.username} ?
     </ModalBody>
     <ModalFooter>
-          <Button color="primary" on:click={resolve_or_reopen}>
+          <Button color="primary" on:click={ban}>
             Oui
           </Button>
           <Button color="secondary" on:click={toggle}>
