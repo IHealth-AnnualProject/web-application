@@ -15,6 +15,7 @@
     onMount(async () => {
             let response = await FU.post('/auth/checkTokenReset/',{token:id});
             if(!response.ok){
+               change = true;
                error = true;
             }
     });
