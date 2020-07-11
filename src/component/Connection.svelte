@@ -3,6 +3,7 @@
     import { writable, readable, derived } from 'svelte-persistent-store/dist/session';
     import { navigate } from "svelte-routing";
     //import Home from "../routes/Home.svelte";
+    import { Nav, NavItem, NavLink } from 'sveltestrap';
     let login;
     let password;
     let error;
@@ -30,6 +31,11 @@
 	        }
             errordisplay = false;
 	}
+
+	function reset_password(){
+	    navigate('/reset')
+	}
+
 </script>
 
 <div class="wrapper fadeInDown">
@@ -46,6 +52,7 @@
                        <input bind:value={password} type="password" class="form-control" placeholder="Password">
                     </div>
                     <button  type="button" class="btn btn-black" on:click="{Login}" >Login</button>
+                    <NavLink href="#" on:click={()=> reset_password(login)} style="display:inline-block;">Mot de passe oublié?</NavLink>
                     {#if errordisplay}
                       <div class ="error">{error}</div>
                     {/if}
@@ -91,7 +98,7 @@ body {
 }
 
 .login-form{
-    padding-top:10%;
+    padding-top:30%;
     width:40%;
     max-width:500px;
 

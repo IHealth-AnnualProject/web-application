@@ -10,13 +10,11 @@
     let open = false;
     const toggle = () => (open = !open);
     let id = queryParams.id;
-
-        onMount(async () => {
-                		data = await FU.get('/error/'+id);
-                		console.log(data);
-                		data.created = formatDateWithHour(new Date(data.created));
-                	});
-
+    onMount(async () => {
+        data = await FU.get('/error/'+id);
+        console.log(data);
+        data.created = formatDateWithHour(new Date(data.created));
+    });
 
     async function resolve_or_reopen(){
             toggle();
@@ -26,8 +24,6 @@
                 await reopen_error();
             }
         }
-
-
 
     async function resolve_error(){
        await FU.post('/error/'+data.id+"/validate");
