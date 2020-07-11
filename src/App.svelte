@@ -14,6 +14,7 @@
 	import Validation from './routes/Validation.svelte';
 	import Report from './routes/Report.svelte';
 	import ChangePassword from './routes/ChangePassword.svelte';
+	import Videos from './routes/Videos.svelte';
 
 	import queryString from "query-string";
 
@@ -43,6 +44,7 @@
     <Route path="/reports"><Report FU={FU}></Report></Route>
     <Route path="/report"><OneReport FU={FU}></OneReport></Route>
     <Route path="/reset"><Reset  FU={FU}></Reset></Route>
+    <Route path="/videos"><Videos  FU={FU}></Videos></Route>
     <Route path="/validations"><Validation FU={FU}></Validation></Route>
     <Route path="/changePass"><ChangePassword FU={FU}></ChangePassword></Route>
 </Router>
