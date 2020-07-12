@@ -115,9 +115,12 @@ var FetchUtils = /** @class */ (function () {
             return __generator(this, function (_a) {
                 request = 'http://' + this.API_URL + '/music/';
                 formData = new FormData();
-                formData.append("file", file);
+                console.log(formData);
                 formData.append("name", name);
-                return [2 /*return*/, fetch(request, { method: "POST", body: formData }).then(function (response) {
+                formData.append("file", file[0]);
+                return [2 /*return*/, fetch(request, { method: "POST", headers: {
+                            'Authorization': 'Bearer ' + this.token
+                        }, body: formData }).then(function (response) {
                         return response;
                     })];
             });
