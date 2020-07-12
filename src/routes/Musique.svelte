@@ -21,20 +21,16 @@
     export let FU;
     let music = [];
     let files;
-
-    function navigate_one_music(id) {
-        navigate('/music/?id='+id)
-    }
+    let musicName = "";
 
     function str_pad_left(string, pad, length) {
         return (new Array(length+1).join(pad)+string).slice(-length);
     }
 
-
     function upload_music(id) {
-        FU.upload_music(files, "toto");
+        FU.upload_music(files, musicName);
         console.log(files);
-        //toggle()
+        toggle()
     }
 
     onMount(async () => {
@@ -63,9 +59,11 @@
   <Modal class="center" isOpen={open} {toggle}>
     <ModalHeader {toggle}>Ajout de musique</ModalHeader>
     <ModalBody>
-        <FormGroup> 
+        <FormGroup>
             <Label for="fileBrowser">Sélectionnez un fichier</Label>
             <Input bind:files type="file" name="file" id="exampleFile" />
+            <Label>Nom de la musique</Label>
+            <Input bind:value={musicName} type="textarea" name="text" id="exampleText" />
         </FormGroup>
     </ModalBody>
     <ModalFooter>
@@ -90,9 +88,12 @@
 
         <tbody class="tableau-hover">
         {#each music as { id, name, duration }, i}
-            <tr on:click={ () => navigate_one_music(music[i].id)}>
+            <tr>
                 <td>{music[i].name}</td>
-                <td>{music[i].duration}</td>
+                <td>
+                    {music[i].duration}
+                    <a href="#">-</a>
+                </td>
             </tr>
        	{/each}
        </tbody>
@@ -105,6 +106,7 @@
         width: 75%;
         padding-left: 25%;
         padding-top: 2%;
+        margin-bottom: 0%
     }
 
     .tableau-hover tr:hover {
