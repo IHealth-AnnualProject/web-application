@@ -33,7 +33,7 @@
 
                function navigate_one_report(id){
                               console.log("hehoo")
-                              navigate('/report/?id='+id)
+                              navigate('/report/?id='+id);
                               update();
                           }
 
@@ -43,6 +43,11 @@
                       //await FU.post('/auth/validatePsy/'+report.id);
                       navigate("/reports");
                   }
+
+              async function itsOk(){
+                await FU.post('/report/'+report.id+"/seen");
+                await navigate('/reports')
+              }
 
 </script>
 <NavBar FU={FU}></NavBar>
@@ -62,7 +67,7 @@
         Utilisateur basique
         {/if}
         <br>
-        {report.from.created}
+        inscription : {report.from.created}
       </ToastBody>
     </Toast>
     </div>
@@ -81,7 +86,7 @@
              Utilisateur basique
              {/if}
              <br>
-             {report.to.created}
+             inscription : {report.to.created}
            </ToastBody>
     </Toast>
     </div>
@@ -93,7 +98,8 @@
          <CardText>
           {report.description}
          </CardText>
-         <Button on:click="{toggle}" color = "danger">Ban</Button>
+         <Button on:click="{toggle}" color = "danger">Bannir</Button>
+         <Button on:click={ async () => await itsOk() } color = "success">Ca va pour cette fois !</Button>
        </CardBody>
        <CardFooter>{report.created}</CardFooter>
      </Card>
@@ -133,7 +139,7 @@
 
 
 <Modal isOpen={open} {toggle}>
-    <ModalHeader {toggle}>Modal title</ModalHeader>
+    <ModalHeader {toggle}>Confirmation</ModalHeader>
     <ModalBody>
      Etes-vous sûr de vouloir ban {report.to.username} ?
     </ModalBody>

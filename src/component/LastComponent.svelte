@@ -61,7 +61,11 @@
    <CardBody>
      <CardSubtitle>{data.name}</CardSubtitle>
      <CardText>
-      {data.description}
+          {#if data.id === undefined}
+             Aucune nouvelle erreur
+          {:else}
+            {data.description}
+          {/if}
      </CardText>
           <Button disabled='{data.id === undefined}' on:click={()=> go_to("/error/?id="+data.id)} >Voir plus</Button>
    </CardBody>
@@ -75,7 +79,11 @@
    <CardBody>
      <CardSubtitle>{data.name}</CardSubtitle>
      <CardText>
-        {data.description}
+        {#if data.id === undefined}
+           Aucune nouveau report
+                     {:else}
+                    {data.description}
+                    {/if}
      </CardText>
      <Button disabled='{data.id === undefined}' on:click={()=> go_to("/report/?id="+data.id)} >Voir plus</Button>
    </CardBody>

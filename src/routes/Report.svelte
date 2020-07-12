@@ -33,11 +33,14 @@
        </thead>
        <tbody class="tableau-hover">
        {#each reports as {name,created,state }, i}
+              {#if !reports[i].isResolved}
+
        		   <tr on:click={ () => navigate_one_report(reports[i].id)}>
                  <td>{reports[i].name}</td>
                  <td>{formatDateWithHour(new Date(reports[i].created))}</td>
                  <td>{reports[i].to.username}</td>
                </tr>
+               {/if}
        	{/each}
 
        </tbody>

@@ -28,7 +28,7 @@
        <tr>
          <th>Titre de l'érreur</th>
          <th>Date</th>
-         <th>Etats</th>
+         <th>Statut</th>
        </tr>
        </thead>
        <tbody class="tableau-hover">
