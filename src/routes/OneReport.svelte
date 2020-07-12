@@ -2,26 +2,40 @@
     import NavBar from '../component/NavBar.svelte'
     export let FU;
     import { onMount } from 'svelte';
-
-    import {Modal,ModalHeader,ModalFooter,ModalBody,ToastBody,ToastHeader,Toast,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
+    import { navigate } from "svelte-routing";
+    let reports =[];
+    import {Table,TabContent,TabPane,Modal,ModalHeader,ModalFooter,ModalBody,ToastBody,ToastHeader,Toast,Jumbotron,Button,Card,CardHeader,CardBody,CardTitle,CardSubtitle,CardText,CardFooter,Badge} from 'sveltestrap';
     import queryString from "query-string";
     let report = {created:"",username:"",name:"",description:"",email:"",to:"",from:""};
-    let queryParams = queryString.parse(window.location.search);
+
     let open = false;
     const toggle = () => (open = !open);
+    async function update (){
+        let queryParams = queryString.parse(window.location.search);
+        let id = queryParams.id;
+        report = await FU.get('/report/'+id);
+        reports = await FU.get('/report/'+report.to.id+'/reported');
+        console.log(report);
+        report.created = formatDateWithHour(new Date(report.created));
+        report.to.created = formatDateWithHour(new Date(report.to.created));
+        report.from.created = formatDateWithHour(new Date(report.from.created));
+       }
 
         export const formatDateWithHour = (date) => {
                    return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
                  };
-    let id = queryParams.id;
-          onMount(async () => {
-                		report = await FU.get('/report/'+id);
-                		console.log(report);
-                		report.created = formatDateWithHour(new Date(report.created));
 
-                		report.to.created = formatDateWithHour(new Date(report.to.created));
-                		report.from.created = formatDateWithHour(new Date(report.from.created));
+          onMount(async () => {
+                        await update()
+
                 	});
+
+
+               function navigate_one_report(id){
+                              console.log("hehoo")
+                              navigate('/report/?id='+id)
+                              update();
+                          }
 
 
               async function ban(){
@@ -32,12 +46,12 @@
 
 </script>
 <NavBar FU={FU}></NavBar>
+<div class="left-div">
 <div class="main-div">
-<div>
 <div class="p-3 bg-success mb-3 toasted">
     <Toast class="mr-1 profile-display">
       <ToastHeader>
-        Sveltestrap
+        Auteur du signalement
       </ToastHeader>
       <ToastBody>
         {report.from.username}
@@ -56,7 +70,7 @@
 <div class="p-3 bg-danger mb-3 toasted">
     <Toast class="mr-1 profile-display">
       <ToastHeader>
-        Sveltestrap
+               Utilisateur signalé
       </ToastHeader>
            <ToastBody>
              {report.to.username}
@@ -71,21 +85,50 @@
            </ToastBody>
     </Toast>
     </div>
+     <Card class="mb-3" style="width: 80%;">
+       <CardHeader>
+          <CardSubtitle style = "font-size: 40px;">{report.name}</CardSubtitle>
+       </CardHeader>
+       <CardBody>
+         <CardText>
+          {report.description}
+         </CardText>
+         <Button on:click="{toggle}" color = "danger">Ban</Button>
+       </CardBody>
+       <CardFooter>{report.created}</CardFooter>
+     </Card>
 </div>
-</div>
+<div class="table-error">
+<h1 class="tab-title">Autre signalement : </h1>
+<Table>
+       <thead>
+       <tr>
+         <th>Titre du rapport</th>
+         <th>Date</th>
+         <th>Utilisateur signalé</th>
+       </tr>
+       </thead>
+       <tbody class="tableau-hover">
+       {#each reports as {name,created,state }, i}
+       {#if reports[i].id !== report.id}
+       		   <tr on:click={ () => navigate_one_report(reports[i].id)}>
+                 <td>{reports[i].name}</td>
+                 <td>{formatDateWithHour(new Date(reports[i].created))}</td>
+                 <td>{reports[i].to.username}</td>
+               </tr>
+        {/if}
+       	{/each}
 
- <Card class="mb-3" style="width: 60%;margin-left: 20%;">
-   <CardHeader>
-      <CardSubtitle style = "font-size: 40px;">{report.name}</CardSubtitle>
-   </CardHeader>
-   <CardBody>
-     <CardText>
-      {report.description}
-     </CardText>
-     <Button on:click="{toggle}" color = "danger">Ban</Button>
-   </CardBody>
-   <CardFooter>{report.created}</CardFooter>
- </Card>
+       </tbody>
+     </Table>
+     </div>
+
+
+
+
+
+
+</div>
 
 
 
@@ -103,24 +146,48 @@
           </Button>
     </ModalFooter>
   </Modal>
+<div class="right-div">
 
-
+</div>
 
 <style>
 
 .main-div {
-    width: 70%;
-    padding: 2%;
-    margin-left: 20%;
+    width:50%;
+    display: inline-block;
 }
 .toasted{
-    width: 40%;
+    min-width: 300PX;
     display: inline-block;
     color:black;
 }
 
 .profile-display{
 
+}
+
+  .tableau-hover tr:hover {
+      background-color: #f5f5f5;
+    }
+
+
+.left-div {
+    padding: 2%;
+    margin-left: 10%
+}
+
+.table-error {
+    display: inline-block;
+    min-width: 40%;
+    min-height:400px;
+
+}
+
+.toast
+
+.tab-title {
+    display: table;
+    padding-bottom: 2%;
 }
 </style>
 
