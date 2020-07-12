@@ -3,7 +3,8 @@
     import { onMount } from 'svelte';
     import { navigate } from "svelte-routing";
     import {
-        Table, 
+        Table,
+        Badge,
         CustomInput,
         Button, 
         Modal, 
@@ -30,7 +31,11 @@
     function upload_music(id) {
         FU.upload_music(files, musicName);
         console.log(files);
-        toggle()
+        toggle();
+    }
+
+    function delete_music(id) {
+		alert('Musique supprimée')
     }
 
     onMount(async () => {
@@ -77,14 +82,20 @@
   </Modal>
 </div>
 
-<div class="table-error">
+<div class="music-table">
     <Table>
         <thead>
             <tr>
                 <th>Titre</th>
                 <th>Duration</th>
+                <th></th>
             </tr>
         </thead>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
         <tbody class="tableau-hover">
         {#each music as { id, name, duration }, i}
@@ -92,7 +103,14 @@
                 <td>{music[i].name}</td>
                 <td>
                     {music[i].duration}
-                    <a href="#">-</a>
+                    <!--<a href="#">-</a>-->
+                </td>
+                <td>
+                    <div class="center" on:click={delete_music}>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
                 </td>
             </tr>
        	{/each}
@@ -102,7 +120,7 @@
 
 
 <style>
-    .table-error{
+    .music-table{
         width: 75%;
         padding-left: 25%;
         padding-top: 2%;
