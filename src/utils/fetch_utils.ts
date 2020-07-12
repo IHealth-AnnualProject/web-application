@@ -59,7 +59,7 @@ export class FetchUtils{
 
     async upload_music(file,name){
         let request = 'http://'+this.API_URL+'/music/';
-        let formData = new Formdata();
+        let formData = new FormData();
         formData.append("file", file);
         formData.append("name",name);
         return fetch(request, {method: "POST", body: formData}).then(function(response) {
