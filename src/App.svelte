@@ -50,7 +50,7 @@
 </Router>
 </div>
 
-<Footer></Footer>
+<!--<Footer></Footer>-->
 <style>
     @font-face { font-family: Betsbi-font; src: url('/resources/PoetsenOne-Regular.ttf'); }
 </style>
