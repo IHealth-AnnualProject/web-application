@@ -11,13 +11,16 @@
         ModalFooter, 
         ModalHeader, 
         FormGroup,
-        Label
+        Label,
+        Input
     } from "sveltestrap";
+
     let open = false;
     const toggle = () => (open = !open);
 
     export let FU;
     let music = [];
+    let files;
 
     function navigate_one_music(id) {
         navigate('/music/?id='+id)
@@ -25,6 +28,13 @@
 
     function str_pad_left(string, pad, length) {
         return (new Array(length+1).join(pad)+string).slice(-length);
+    }
+
+
+    function upload_music(id) {
+        FU.upload_music(files, "toto");
+        console.log(files);
+        //toggle()
     }
 
     onMount(async () => {
@@ -53,17 +63,13 @@
   <Modal class="center" isOpen={open} {toggle}>
     <ModalHeader {toggle}>Ajout de musique</ModalHeader>
     <ModalBody>
-        <FormGroup>
+        <FormGroup> 
             <Label for="fileBrowser">Sélectionnez un fichier</Label>
-            <CustomInput
-            type="file"
-            id="fileBrowser"
-            name="customFile"
-            label="Aucun fichier choisi" />
+            <Input bind:files type="file" name="file" id="exampleFile" />
         </FormGroup>
     </ModalBody>
     <ModalFooter>
-      <Button color="primary" on:click={toggle}>
+      <Button color="primary" on:click={upload_music}>
         Ajouter
       </Button>
       <Button color="secondary" on:click={toggle}>
