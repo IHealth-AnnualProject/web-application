@@ -49,7 +49,7 @@
        Vous pouvez rentrer en contact avec l'utilisateur via cet email : {data.email}
      {/if}
      </CardText>
-     <Button disabled='{data.id === undefined}' on:click={()=> go_to("/error/?id="+data.id)} >Voir plus</Button>
+     <Button disabled='{data.id === undefined}' on:click={()=> go_to("/validation/?id="+data.id)} >Voir plus</Button>
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>
