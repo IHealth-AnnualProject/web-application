@@ -127,6 +127,25 @@ var FetchUtils = /** @class */ (function () {
             });
         });
     };
+    FetchUtils.prototype.delete = function (route) {
+        return __awaiter(this, void 0, void 0, function () {
+            var request;
+            return __generator(this, function (_a) {
+                request = 'http://' + this.API_URL + route;
+                return [2 /*return*/, fetch(request, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + this.token
+                        },
+                        method: "DELETE",
+                        mode: 'cors'
+                    }).then(function (response) {
+                        return response;
+                    })];
+            });
+        });
+    };
     FetchUtils.prototype.setToken = function (token) {
         localStorage.setItem("token", token);
         this.token = token;

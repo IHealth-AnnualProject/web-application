@@ -72,6 +72,23 @@ export class FetchUtils{
         });
     }
 
+
+    async delete(route:string){
+        let request = 'http://'+this.API_URL+route;
+        return fetch(request, {
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+this.token
+            },
+            method: "DELETE",
+            mode:'cors'
+        }).then(function(response) {
+            return response;
+        })
+    }
+
+
     setToken(token:string){
         localStorage.setItem("token", token);
         this.token=token;
