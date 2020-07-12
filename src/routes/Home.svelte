@@ -10,7 +10,7 @@
 
 <NavBar FU={FU}></NavBar>
 <div>
-<h1>Dernières nouveautées </h1>
+<h1>Dernières nouveautés </h1>
 </div>
 <div class="valid">
 <LastComponent FU={FU} type="VALID"></LastComponent>
