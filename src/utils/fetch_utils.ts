@@ -4,7 +4,7 @@ const { writable, readable, derived } = local;
 
 export class FetchUtils{
 
-    constructor(private readonly API_URL: string,private token,user,private store,private tokenstore) {
+    constructor(private readonly API_URL: string,private token,user,private store,private payload) {
         this.token = localStorage.getItem("token") || "";
         this.store =  localStorage.getItem("token");
     }
@@ -21,6 +21,7 @@ export class FetchUtils{
             mode: 'cors',
             };
         return fetch(request,myInit).then(function(response) {
+            console.log(response);
            return  response.json().then(function(data) {
                 return data;
             });

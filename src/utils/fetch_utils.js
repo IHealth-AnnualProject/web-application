@@ -40,11 +40,11 @@ exports.FetchUtils = void 0;
 var svelte_persistent_store_1 = require("svelte-persistent-store");
 var writable = svelte_persistent_store_1.local.writable, readable = svelte_persistent_store_1.local.readable, derived = svelte_persistent_store_1.local.derived;
 var FetchUtils = /** @class */ (function () {
-    function FetchUtils(API_URL, token, user, store, tokenstore) {
+    function FetchUtils(API_URL, token, user, store, payload) {
         this.API_URL = API_URL;
         this.token = token;
         this.store = store;
-        this.tokenstore = tokenstore;
+        this.payload = payload;
         this.token = localStorage.getItem("token") || "";
         this.store = localStorage.getItem("token");
     }
@@ -63,6 +63,7 @@ var FetchUtils = /** @class */ (function () {
                     mode: 'cors',
                 };
                 return [2 /*return*/, fetch(request, myInit).then(function (response) {
+                        console.log(response);
                         return response.json().then(function (data) {
                             return data;
                         });

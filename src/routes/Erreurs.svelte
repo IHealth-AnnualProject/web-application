@@ -13,7 +13,7 @@
 
        function navigate_one_errors(value){
                 console.log(value);
-                navigate('/error/?token='+JSON.stringify(value))
+                navigate('/error/?id='+value.id)
             }
 
     onMount(async () => {

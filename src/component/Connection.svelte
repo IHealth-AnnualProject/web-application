@@ -23,10 +23,16 @@
                 return;
 	        }else{
 	           res.json().then(function(json) {
+	                                        if(json.user.isAdmin){
+	                                        console.log(json);
 	                                        FU.setToken(json.token.access_token);
 	                                        //token = json.token.access_token;
 	                                        FU.user = json.user;
                                             navigate("/home", { replace: true });
+                                            }else{
+	                                               errordisplay = true;
+	                                               error = "Vous n'êtes pas administrateur";
+                                            }
                                           });
 	        }
             errordisplay = false;

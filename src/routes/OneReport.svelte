@@ -33,6 +33,7 @@
 </script>
 <NavBar FU={FU}></NavBar>
 <div class="main-div">
+<div>
 <div class="p-3 bg-success mb-3 toasted">
     <Toast class="mr-1 profile-display">
       <ToastHeader>
@@ -71,7 +72,7 @@
     </Toast>
     </div>
 </div>
-
+</div>
 
  <Card class="mb-3" style="width: 60%;margin-left: 20%;">
    <CardHeader>

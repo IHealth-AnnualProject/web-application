@@ -29,7 +29,7 @@
                         	    }
                                 navigate("/", { replace: true });
                         	}else{
-                        	    navigate("/home", { replace: true });
+                        	    //navigate("/home", { replace: true });
                         	}
     	});
 </script>
