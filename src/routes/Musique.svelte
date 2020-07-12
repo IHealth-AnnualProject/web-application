@@ -13,7 +13,10 @@
         ModalHeader, 
         FormGroup,
         Label,
-        Input
+        Input,
+        Pagination, 
+        PaginationItem, 
+        PaginationLink
     } from "sveltestrap";
 
     let open = false;
@@ -127,6 +130,27 @@
 </div>
 
 
+<div class="pagination">
+    <Pagination ariaLabel="Page navigation example">
+        <PaginationItem disabled>
+            <PaginationLink first href="#" />
+        </PaginationItem>
+        <PaginationItem disabled>
+            <PaginationLink previous href="#" />
+        </PaginationItem>
+        <PaginationItem active>
+            <PaginationLink href="#">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+            <PaginationLink next href="#" />
+        </PaginationItem>
+        <PaginationItem>
+            <PaginationLink last href="#" />
+        </PaginationItem>
+    </Pagination>
+</div>
+
+
 <style>
     .music-table{
         width: 75%;
@@ -147,6 +171,13 @@
 
     .center {
         margin: auto;
+        width: 40%;
+        padding: 20px;
+    }
+
+    .pagination {
+        margin: auto;
+        margin-left: 43%;
         width: 40%;
         padding: 20px;
     }
