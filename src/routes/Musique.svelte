@@ -29,16 +29,19 @@
     }
 
     function upload_music(id) {
-        FU.upload_music(files, musicName);
+        FU.upload_music(files, musicName).then(function(){
+            update();
+        });
         console.log(files);
         toggle();
     }
 
-    function delete_music(id) {
-		alert('Musique supprimée')
+    async function delete_music(id) {
+        await FU.delete("/music/" + id);
+        await update();
     }
 
-    onMount(async () => {
+    async function update() {
         music = await FU.get('/music');
         var i;
         for (i = 0; i < music.length; i++) {
@@ -49,6 +52,11 @@
         }
 
         console.log(music);
+    }
+
+
+    onMount(async () => {
+        await update();
     });
 </script>
 
@@ -106,7 +114,7 @@
                     <!--<a href="#">-</a>-->
                 </td>
                 <td>
-                    <div class="center" on:click={delete_music}>
+                    <div class="center" on:click={ async () => await delete_music(music[i].id)}>
                         <button type="button" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
