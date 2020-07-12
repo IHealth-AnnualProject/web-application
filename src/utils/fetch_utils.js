@@ -109,6 +109,20 @@ var FetchUtils = /** @class */ (function () {
             });
         });
     };
+    FetchUtils.prototype.upload_music = function (file, name) {
+        return __awaiter(this, void 0, void 0, function () {
+            var request, formData;
+            return __generator(this, function (_a) {
+                request = 'http://' + this.API_URL + '/music/';
+                formData = new FormData();
+                formData.append("file", file);
+                formData.append("name", name);
+                return [2 /*return*/, fetch(request, { method: "POST", body: formData }).then(function (response) {
+                        return response;
+                    })];
+            });
+        });
+    };
     FetchUtils.prototype.setToken = function (token) {
         localStorage.setItem("token", token);
         this.token = token;
