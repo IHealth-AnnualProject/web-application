@@ -48,9 +48,9 @@
  </Card>
 
 <Modal isOpen={open} {toggle}>
-    <ModalHeader {toggle}>Modal title</ModalHeader>
+    <ModalHeader {toggle}>Confirmation</ModalHeader>
     <ModalBody>
-     Etes-vous sûr de vouloir valider ce psycologue ?
+     Etes-vous sûr de vouloir valider ce psychologue ?
     </ModalBody>
     <ModalFooter>
           <Button color="primary" on:click={validate}>

@@ -31,12 +31,12 @@
 </script>
    <div class="nave">
       <ul>
-        <li class="Accueil" ><a href="#" on:click="{navigate_home}">Home</a></li>
-        <li class="Erreur" ><a href="#" on:click="{navigate_errors}">Erreurs</a></li>
-        <li class="Erreur" ><a href="#" on:click="{navigate_valid}">Valid</a></li>
-        <li class="Erreur" ><a href="#" on:click="{navigate_report}">Report</a></li>
+        <li class="Accueil" ><a href="#" on:click="{navigate_home}">Accueil</a></li>
+        <li class="Erreur" ><a href="#" on:click="{navigate_errors}">Erreur</a></li>
+        <li class="Erreur" ><a href="#" on:click="{navigate_valid}">Validation</a></li>
+        <li class="Erreur" ><a href="#" on:click="{navigate_report}">Signalement</a></li>
         <li class="Erreur" ><a href="#" on:click="{navigate_musique}">Musique</a></li>
-        <li class="Disconnect" on:click="{Disconnect}"><a href="#">Disconnect</a></li>
+        <li class="Disconnect" on:click="{Disconnect}"><a href="#">Deconnexion</a></li>
       </ul>
     </div>
 <style>

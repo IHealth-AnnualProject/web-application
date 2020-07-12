@@ -54,14 +54,14 @@
      {#if data.state === "PENDING"}
      <Button on:click="{toggle}" color = "success">Resoudre</Button>
      {:else}
-     <Button  on:click="{toggle}" color ="danger" >Reopen</Button>
+     <Button  on:click="{toggle}" color ="danger" >Repasser en attente</Button>
       {/if}
    </CardBody>
    <CardFooter>{data.created}</CardFooter>
  </Card>
 
 <Modal isOpen={open} {toggle}>
-    <ModalHeader {toggle}>Modal title</ModalHeader>
+    <ModalHeader {toggle}>Confirmation</ModalHeader>
     <ModalBody>
      Etes-vous sûr de vouloir {#if data.state === "PENDING"}valider
                                                {:else}
