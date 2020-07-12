@@ -2,25 +2,24 @@
     import NavBar from '../component/NavBar.svelte'
     import {Table} from 'sveltestrap';
     import { onMount } from 'svelte';
-    import { Button } from "sveltestrap";
+    import { navigate } from "svelte-routing";
 
     export let FU;
-
-    let inputValue = '';
     let reports = [];
 
     export const formatDateWithHour = (date) => {
-           return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
-         };
+        return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()} ${date.getUTCHours()}h${String(date.getMinutes()).padStart(2, '0')}`
+    };
 
 
-     function navigate_one_report(id){
-                    navigate('/report/?id='+id)
-                }
+    function navigate_one_report(id) {
+        navigate('/report/?id='+id)
+    }
+
     onMount(async () => {
-        		reports = await FU.get('/report');
-        		console.log(reports);
-        	});
+        reports = await FU.get('/report');
+        console.log(reports);
+    });
 </script>
 
 <NavBar FU={FU}></NavBar>
@@ -39,13 +38,12 @@
        </thead>
        <tbody class="tableau-hover">
        {#each reports as {name,created,state }, i}
-       		   <tr on:click={ () => navigate_one_report(reports[i].id)}>
-                 <td>{reports[i].name}</td>
-                 <td>{formatDateWithHour(new Date(reports[i].created))}</td>
-                 <td>{reports[i].to.username}</td>
-               </tr>
+            <tr on:click={ () => navigate_one_report(reports[i].id)}>
+                <td>{reports[i].name}</td>
+                <td>{formatDateWithHour(new Date(reports[i].created))}</td>
+                <td>{reports[i].to.username}</td>
+            </tr>
        	{/each}
-
        </tbody>
     </Table>
 </div>
